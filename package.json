@@ -1,0 +1,22 @@
+{
+  "name": "swag-me-out",
+  "version": "1.0.0",
+  "description": "reactjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daviddelusenet/reactjs-todoapp.git"
+  },
+  "keywords": [
+    "reactjs"
+  ],
+  "author": "David de Lusenet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daviddelusenet/reactjs-todoapp/issues"
+  },
+  "homepage": "https://github.com/daviddelusenet/reactjs-todoapp#readme"
+}
