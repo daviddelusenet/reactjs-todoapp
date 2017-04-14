@@ -1,4 +1,4 @@
-var webpack = require("webpack");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
@@ -29,13 +29,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!autoprefixer-loader'
+        loader: 'style-loader!css-loader!postcss-loader'
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader'
+        loader: 'style-loader!css-loader!postcss-loader!sass-loader'
       }
     ]
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  postcss: () => {
+    return [
+      require('autoprefixer')
+    ];
+  }
 };
