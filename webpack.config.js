@@ -36,5 +36,6 @@ module.exports = {
         loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader'
       }
     ]
-  }
+  },
+  devtool: 'source-map'
 };
