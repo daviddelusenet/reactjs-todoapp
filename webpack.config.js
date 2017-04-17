@@ -1,46 +1,52 @@
-const webpack = require("webpack");
+var webpack = require('webpack');
 
-module.exports = {
-  entry: "./src/index.js",
+var config = {
+  context: __dirname + '/src', // `__dirname` is root of project and `src` is source
+  entry: {
+    app: './index.js'
+  },
   output: {
-    path: "dist/js",
-    filename: "bundle.js",
-    publicPath: "js"
+    path: __dirname + '/dist/js', // `dist` is the destination
+    filename: 'bundle.js',
+    publicPath: 'js'
   },
   devServer: {
     inline: true,
-    contentBase: "./dist",
+    contentBase: __dirname + '/dist', // `__dirname` is root of the project
     port: 3000
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        loader: "babel-loader",
-        query: {
-          presets: ["latest", "react"]
-        }
-      },
-      {
-        test: /\.json$/,
-        exclude: /(node_modules)/,
-        loader: "json-loader"
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader'
+        test: /\.js$/, // Check for all js files
+        exclude: /node_modules/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['latest', 'react']
+          }
+        }]
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader'
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('autoprefixer')
+                ];
+              }
+            }
+          },
+          'sass-loader'
+        ]
       }
     ]
-  },
-  devtool: 'source-map',
-  postcss: () => {
-    return [
-      require('autoprefixer')
-    ];
   }
 };
+
+module.exports = config;
