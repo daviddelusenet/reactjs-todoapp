@@ -1,0 +1,56 @@
+.Todo {
+  position: relative;
+  list-style: none;
+  font-size: 17px;
+  line-height: 30px;
+}
+
+  .Todo-checkbox {
+    position: absolute;
+    top: 8px;
+    left: 0;
+  }
+
+  .Todo-text {
+    display: block;
+    padding-left: 20px;
+  }
+
+  .Todo-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+    resize: none;
+    font-size: 17px;
+    line-height: 25px;
+    border: 0;
+    outline: none;
+    background-color: rgba(255, 0, 0, .1);
+  }
+
+  .Todo-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+
+.Todo--being-edited {
+  .Todo-input {
+    display: block;
+  }
+
+  .Todo-text {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .Todo-delete,
+  .Todo-checkbox {
+    display: none;
+  }
+}

@@ -1,4 +1,6 @@
 import React from 'react';
+import Todo from '../Todo/Todo';
+import './TodoList.scss';
 
 class TodoList extends React.Component {
 
@@ -8,8 +10,8 @@ class TodoList extends React.Component {
 
   render() {
     return(
-        <ul className="todo-list">
-          <li>todo</li>
+        <ul className="TodoList">
+          {this.props.todos.map((object, key) => <Todo key={key} id={key} deleteTodo={this.props.deleteTodo} toggleDone={this.props.toggleDone} updateTodo={this.props.updateTodo} todo={object} />)}
         </ul>
     );
   }

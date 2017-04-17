@@ -1,0 +1,24 @@
+@import '../../shared/Variables/Variables';
+
+.TodoForm {
+  display: flex;
+}
+
+  .TodoForm-input {
+    height: 50px;
+    padding: 0 10px;
+    border-bottom: 2px solid $c-steel-gray;
+    outline: none;
+    flex: 1 1 auto;
+  }
+
+  .TodoForm-button {
+    padding: 0 20px;
+    cursor: pointer;
+    color: $c-white;
+    border-bottom: 2px solid $c-steel-gray;
+    border-left: 2px solid $c-steel-gray;
+    outline: none;
+    background-color: $c-tapestry;
+    flex: 0 0 auto;
+  }
