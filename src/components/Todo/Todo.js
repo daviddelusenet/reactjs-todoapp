@@ -1,5 +1,5 @@
 import React from 'react';
-import './Todo.scss';
+import Styles from './Todo.scss';
 
 class Todo extends React.Component {
 
@@ -22,7 +22,7 @@ class Todo extends React.Component {
   }
 
   handleEdit() {
-    this.todo.classList.add('Todo--being-edited');
+    this.todo.classList.add(Styles['Todo--being-edited']);
   }
 
   handleUpdate(e) {
@@ -30,18 +30,18 @@ class Todo extends React.Component {
       const done = this.props.updateTodo(this.props.todo.id, this.input.value);
 
       if (done) {
-        this.todo.classList.remove('Todo--being-edited');
+        this.todo.classList.remove(Styles['Todo--being-edited']);
       }
     }
   }
 
   render() {
     return(
-        <li className="Todo" ref={(li) => {this.todo = li}}>
-          <input className="Todo-checkbox" type="checkbox" ref={(checkbox) => {this.checkbox = checkbox}} onChange={this.handleChange} checked={this.props.todo.done} />
-          <input className="Todo-input" ref={(input) => {this.input = input}} defaultValue={this.props.todo.text} onKeyDown={this.handleUpdate}></input>
-          <span className="Todo-text" onDoubleClick={this.handleEdit}>{this.props.todo.text}</span>
-          <span className="Todo-delete" onClick={this.handleDelete}>x</span>
+        <li styleName="Todo" ref={(li) => {this.todo = li}}>
+          <input styleName="Todo-checkbox" type="checkbox" ref={(checkbox) => {this.checkbox = checkbox}} onChange={this.handleChange} checked={this.props.todo.done} />
+          <input styleName="Todo-input" ref={(input) => {this.input = input}} defaultValue={this.props.todo.text} onKeyDown={this.handleUpdate}></input>
+          <span styleName="Todo-text" onDoubleClick={this.handleEdit}>{this.props.todo.text}</span>
+          <span styleName="Todo-delete" onClick={this.handleDelete}>x</span>
         </li>
     );
   }

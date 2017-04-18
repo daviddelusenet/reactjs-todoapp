@@ -84,6 +84,8 @@ class TodoApp extends React.Component {
 
     // distribute updated todos array
     this.updateState();
+
+    return true;
   }
 
   updateState() {
