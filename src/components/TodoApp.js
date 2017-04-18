@@ -98,7 +98,7 @@ class TodoApp extends React.Component {
 
   render() {
     return(
-        <div className="TodoApp">
+        <div styleName="TodoApp">
           <TodoForm addTodo={this.addTodo} />
           <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} toggleDone={this.toggleDone} updateTodo={this.updateTodo} />
         </div>
