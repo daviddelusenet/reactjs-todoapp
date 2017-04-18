@@ -1,6 +1,5 @@
 .idea
 node_modules
 .log
-dist/*.js
-dist/*.css
-dist/*.map
+dist/js/*
+dist/css/*
