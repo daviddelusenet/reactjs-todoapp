@@ -1,7 +1,6 @@
 import React from 'react';
 import TodoForm from './TodoForm/TodoForm';
 import TodoList from './TodoList/TodoList';
-
 import './TodoApp.scss';
 
 class TodoApp extends React.Component {
@@ -72,8 +71,6 @@ class TodoApp extends React.Component {
 
     // distribute updated todos array
     this.updateState();
-
-    console.log(done);
   }
 
   updateTodo(todoId, newValue) {
@@ -87,8 +84,6 @@ class TodoApp extends React.Component {
 
     // distribute updated todos array
     this.updateState();
-
-    return "wow";
   }
 
   updateState() {
