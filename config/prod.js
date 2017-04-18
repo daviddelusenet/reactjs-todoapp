@@ -3,13 +3,13 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = function(env) {
   return {
-    context: __dirname + '/../src', // `__dirname` is root of project and `src` is source
+    context: __dirname + '/../src',
     entry: {
       app: './index.js'
     },
     output: {
       path: __dirname + '/../dist/js', // `dist` is the destination
-      filename: '[name].min.js',
+      filename: '[name].js',
       publicPath: 'js'
     },
     devtool: 'cheap-module-source-map',
@@ -20,8 +20,9 @@ module.exports = function(env) {
           exclude: /node_modules/,
           use: [{
             loader: 'babel-loader',
-            query: {
-              presets: ['latest', 'react']
+            options: {
+              presets: ['latest', 'react'],
+              plugins: ['react-css-modules']
             }
           }]
         },
@@ -34,7 +35,8 @@ module.exports = function(env) {
                 options: {
                   sourceMap: true,
                   modules: true,
-                  importLoaders: true
+                  importLoaders: 1,
+                  localIdentName: '[path]___[name]__[local]___[hash:base64]'
                 }
               },
               {

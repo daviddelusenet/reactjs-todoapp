@@ -2,5 +2,17 @@
     "presets": [
         "react",
         "es2015"
+    ],
+    "plugins": [
+        [
+            "react-css-modules",
+            {
+                "context": "./src",
+                "generateScopedName": "[path]___[name]__[local]___[hash:base64]",
+                "filetypes": {
+                  ".scss": "postcss-scss"
+                }
+            }
+        ]
     ]
 }
