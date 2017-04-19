@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from './Todo.scss';
+import styles from './Todo.scss';
 
 class Todo extends React.Component {
 
@@ -13,6 +13,12 @@ class Todo extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.todo.classList.contains(styles['Todo--being-edited'])) {
+      this.todo.classList.remove(styles['Todo--being-edited']);
+    }
+  }
+
   handleChange() {
     this.props.toggleDone(this.props.todo.id, this.checkbox.checked);
   }
@@ -22,16 +28,12 @@ class Todo extends React.Component {
   }
 
   handleEdit() {
-    this.todo.classList.add(Styles['Todo--being-edited']);
+    this.todo.classList.add(styles['Todo--being-edited']);
   }
 
   handleUpdate(e) {
     if (e.keyCode == 13) {
-      const done = this.props.updateTodo(this.props.todo.id, this.input.value);
-
-      if (done) {
-        this.todo.classList.remove(Styles['Todo--being-edited']);
-      }
+      this.props.updateTodo(this.props.todo.id, this.input.value);
     }
   }
 

@@ -3,10 +3,6 @@ import './TodoForm.scss';
 
 class TodoForm extends React.Component {
 
-  constructor() {
-    super();
-  }
-
   handleSubmit(e) {
     e.preventDefault();
 

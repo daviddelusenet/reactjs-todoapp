@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './TodoForm/TodoForm';
 import TodoList from './TodoList/TodoList';
+import base from './../base';
 import './TodoApp.scss';
 
 class TodoApp extends React.Component {
@@ -15,25 +16,36 @@ class TodoApp extends React.Component {
     this.toggleDone = this.toggleDone.bind(this);
     this.updateTodo = this.updateTodo.bind(this);
 
-    // Set state + todos
+    // Set initial state
     this.state = {
-      todos: []
+      todos: [],
+      loading: true
     };
-
-    this.todos = JSON.parse(localStorage.getItem('todos')) || [];
   }
 
   componentWillMount() {
 
-    // check if there were todos in the localStorage
-    if (this.todos.length > 0) {
-      // distribute updated todos array
-      this.updateState();
-    }
+    this.ref = base.syncState('/', {
+      context: this,
+      state: 'todos',
+      asArray: true,
+      then() {
+        this.setState({
+          loading: false
+        });
+      }
+    });
 
   }
 
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
   addTodo(value) {
+    // copy state
+    const todos = this.state.todos.slice(0);
+
     // setup new todo object
     const todo = {
       'text': value,
@@ -41,71 +53,69 @@ class TodoApp extends React.Component {
       'done': false
     };
 
-    // add new todo to todos array
-    this.todos.push(todo);
-    // distribute updated todos array
-    this.updateState();
+    // add new todo to copy of todos
+    todos.push(todo);
+
+    // distribute updated todos
+    this.setState({ todos });
   }
 
   deleteTodo(todoId) {
+    // copy state
+    const todos = this.state.todos.slice(0);
+
     // loop over todos array
-    this.todos.map((object, key) => {
+    todos.map((object, key) => {
       // check if id's are equal, if so remove the todo
       if (todoId == object.id) {
-        this.todos.splice(key, 1);
+        todos.splice(key, 1);
       }
     });
 
-    // distribute updated todos array
-    this.updateState();
+    // distribute updated todos
+    this.setState({ todos });
   }
 
   toggleDone(todoId, done) {
+    // copy state
+    const todos = this.state.todos.slice(0);
+
     // loop over todos array
-    this.todos.map((todo, key) => {
+    todos.map((todo, key) => {
       // check if id's are equal, if so remove the todo
       if (todoId == todo.id) {
         todo.done = done;
       }
     });
 
-    // distribute updated todos array
-    this.updateState();
+    // distribute updated todos
+    this.setState({ todos });
   }
 
   updateTodo(todoId, newValue) {
+    // copy state
+    const todos = this.state.todos.slice(0);
+
     // loop over todos array
-    this.todos.map((object, key) => {
+    todos.map((todo, key) => {
       // check if id's are equal, if so update the todo
-      if (todoId == object.id) {
-        this.todos[key].text = newValue;
+      if (todoId == todo.id) {
+        todo.text = newValue;
       }
     });
 
-    // distribute updated todos array
-    this.updateState();
-
-    return true;
+    // distribute updated todos
+    this.setState({ todos });
   }
 
-  updateState() {
-    // add todos to localStorage
-    localStorage.setItem('todos', JSON.stringify(this.todos));
-
-    // update the state with the new todos
-    this.setState((prevState, props) => ({
-      todos: this.todos
-    }));
+  render() {
+    return(
+        <div styleName="TodoApp">
+          <TodoForm addTodo={this.addTodo} />
+          <TodoList todos={this.state.todos} loading={this.state.loading} deleteTodo={this.deleteTodo} toggleDone={this.toggleDone} updateTodo={this.updateTodo} />
+        </div>
+    );
   }
-
-render() {
-  return(
-      <div styleName="TodoApp">
-        <TodoForm addTodo={this.addTodo} />
-        <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} toggleDone={this.toggleDone} updateTodo={this.updateTodo} />
-      </div>
-  );
-}
 
 }
 
