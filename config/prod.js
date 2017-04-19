@@ -1,9 +1,10 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const context = __dirname + '/../src';
 
 module.exports = function(env) {
   return {
-    context: __dirname + '/../src',
+    context,
     entry: {
       app: './index.js'
     },
@@ -22,7 +23,18 @@ module.exports = function(env) {
             loader: 'babel-loader',
             options: {
               presets: ['latest', 'react'],
-              plugins: ['react-css-modules']
+              plugins: [
+                [
+                  "react-css-modules",
+                  {
+                    context: __dirname + '/../src', // `__dirname` is root of project and `src` is source
+                    "generateScopedName": '[path]___[name]__[local]___[hash:base64]',
+                    "filetypes": {
+                      ".scss": "postcss-scss"
+                    }
+                  }
+                ]
+              ]
             }
           }]
         },
@@ -35,7 +47,7 @@ module.exports = function(env) {
                 options: {
                   sourceMap: true,
                   modules: true,
-                  importLoaders: 1,
+                  importLoaders: 2,
                   localIdentName: '[path]___[name]__[local]___[hash:base64]'
                 }
               },
@@ -43,6 +55,16 @@ module.exports = function(env) {
                 loader: 'sass-loader',
                 options: {
                   sourceMap: true
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  plugins: () => {
+                    return [
+                      require('autoprefixer')
+                    ];
+                  }
                 }
               }
             ]
