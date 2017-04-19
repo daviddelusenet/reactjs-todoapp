@@ -43,7 +43,7 @@ class Todo extends React.Component {
           <input styleName="Todo-checkbox" type="checkbox" ref={(checkbox) => {this.checkbox = checkbox}} onChange={this.handleChange} checked={this.props.todo.done} />
           <input styleName="Todo-input" ref={(input) => {this.input = input}} defaultValue={this.props.todo.text} onKeyDown={this.handleUpdate}></input>
           <span styleName="Todo-text" onDoubleClick={this.handleEdit}>{this.props.todo.text}</span>
-          <span styleName="Todo-delete" onClick={this.handleDelete}>x</span>
+          <span styleName="Todo-delete" onClick={this.handleDelete}>&#10006;</span>
         </li>
     );
   }

@@ -1,8 +1,9 @@
 @import '../../shared/Variables/Variables';
 
 body {
-  font-family: $ff-futura;
+  font-family: $ff-lucida-grande;
   line-height: 1.5;
+  color: $c-black;
   background-color: $c-swish-coffee;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
