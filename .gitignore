@@ -1,5 +1,7 @@
 .idea
 node_modules
 .log
-dist/js/*
-dist/css/*
+dist/css/**
+dist/js/**
+css/**
+js/**
