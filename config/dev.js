@@ -1,10 +1,10 @@
 const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const baseConfig = require('./base');
 const { resolve } = require('path');
-const context = resolve(__dirname, './../src');
 
 module.exports = function(env) {
-  return {
-    context,
+  return webpackMerge(baseConfig(), {
     entry: {
       app: [
         'react-hot-loader/patch',
@@ -19,11 +19,6 @@ module.exports = function(env) {
         // the entry point of our app
       ]
     },
-    output: {
-      path: resolve(__dirname, './../dist'), // `dist` is the destination
-      filename: '[name].js',
-      publicPath: '/js'
-    },
     devServer: {
       hot: true, // enable HMR on the server
       inline: true,
@@ -34,11 +29,6 @@ module.exports = function(env) {
     devtool: 'inline-source-map',
     module: {
       rules: [
-        {
-          test: /\.js$/, // Check for all js files
-          exclude: /node_modules/,
-          loader: 'babel-loader'
-        },
         {
           test: /\.scss$/,
           use: ['style-loader',
@@ -72,5 +62,5 @@ module.exports = function(env) {
       new webpack.NamedModulesPlugin()
       // prints more readable module names in the browser console on HMR updates
     ]
-  }
+  })
 };

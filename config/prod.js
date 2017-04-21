@@ -1,26 +1,16 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const context = __dirname + '/../src';
+const webpackMerge = require('webpack-merge');
+const baseConfig = require('./base');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function(env) {
-  return {
-    context,
+  return webpackMerge(baseConfig(), {
     entry: {
       app: './index.js'
-    },
-    output: {
-      path: __dirname + '/../dist/js', // `dist` is the destination
-      filename: '[name].js',
-      publicPath: 'js'
     },
     devtool: 'cheap-module-source-map',
     module: {
       rules: [
-        {
-          test: /\.js$/, // Check for all js files
-          exclude: /node_modules/,
-          loader: 'babel-loader'
-        },
         {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
@@ -82,5 +72,5 @@ module.exports = function(env) {
         comments: false
       })
     ]
-  }
+  })
 };

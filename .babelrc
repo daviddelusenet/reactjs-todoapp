@@ -1,33 +1,30 @@
 {
   "presets": [
-    ["es2015", {"modules": false}],
-    // webpack understands the native import syntax, and uses it for tree shaking
-
-    "react"
-    // Transpile React components to JavaScript
-  ],
-  "plugins": [
-    ["react-css-modules",
-      {
-        "context": "./src",
-        "generateScopedName": "[name]__[local]___[hash:base64:5]",
-        "filetypes": {
-          ".scss": "postcss-scss"
-        }
-      }
-    ]
+    ["es2015", {"modules": false}], // webpack understands the native import syntax and uses it for tree shaking
+    "react" // transpile React components to JavaScript
   ],
   "env": {
     "dev": {
-      "plugins": ["react-hot-loader/babel"] // Enables React code to work with HMR.
+      "plugins": [
+        "react-hot-loader/babel", // enables React code to work with HMR
+        ["react-css-modules", {
+          "context": "./src",
+          "generateScopedName": "[name]__[local]___[hash:base64:5]",
+          "filetypes": {
+            ".scss": "postcss-scss"
+          }
+        }]
+      ]
     },
     "prod": {
       "plugins": [
-        ["react-css-modules",
-          {
-            "generateScopedName": "[path]___[name]__[local]___[hash:base64]",
+        ["react-css-modules", {
+          "context": "./src",
+          "generateScopedName": "[path]___[name]__[local]___[hash:base64]",
+          "filetypes": {
+            ".scss": "postcss-scss"
           }
-        ]
+        }]
       ]
     }
   }
