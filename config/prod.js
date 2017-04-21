@@ -19,24 +19,7 @@ module.exports = function(env) {
         {
           test: /\.js$/, // Check for all js files
           exclude: /node_modules/,
-          use: [{
-            loader: 'babel-loader',
-            options: {
-              presets: ['latest', 'react'],
-              plugins: [
-                [
-                  "react-css-modules",
-                  {
-                    context: __dirname + '/../src', // `__dirname` is root of project and `src` is source
-                    "generateScopedName": '[path]___[name]__[local]___[hash:base64]',
-                    "filetypes": {
-                      ".scss": "postcss-scss"
-                    }
-                  }
-                ]
-              ]
-            }
-          }]
+          loader: 'babel-loader'
         },
         {
           test: /\.scss$/,
@@ -76,6 +59,27 @@ module.exports = function(env) {
       new ExtractTextPlugin({
         filename: '../css/style.min.css',
         allChunks: true
+      }),
+      new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        beautify: false,
+        mangle: {
+          screw_ie8: true,
+          keep_fnames: true
+        },
+        compress: {
+          screw_ie8: true,
+          drop_console: true
+        },
+        comments: false
       })
     ]
   }

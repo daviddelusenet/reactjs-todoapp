@@ -4,8 +4,8 @@
   "description": "reactjs",
   "main": "index.js",
   "scripts": {
-    "build:dev": "node_modules/.bin/webpack-dev-server --env=dev",
-    "build:prod": "node_modules/.bin/webpack -p --env=prod"
+    "build:dev": "BABEL_ENV=dev node_modules/.bin/webpack-dev-server --env=dev",
+    "build:prod": "BABEL_ENV=prod node_modules/.bin/webpack --env=prod"
   },
   "repository": {
     "type": "git",
@@ -44,7 +44,6 @@
     "re-base": "^2.7.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-hot-loader": "^3.0.0-beta.6",
-    "react-icons": "^2.2.1"
+    "react-hot-loader": "^3.0.0-beta.6"
   }
 }

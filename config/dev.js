@@ -37,36 +37,18 @@ module.exports = function(env) {
         {
           test: /\.js$/, // Check for all js files
           exclude: /node_modules/,
-          use: [{
-            loader: 'babel-loader',
-            query: {
-              presets: ['latest', 'react'],
-              plugins: [
-                [
-                  "react-css-modules",
-                  {
-                    context: __dirname + '/../src', // `__dirname` is root of project and `src` is source
-                    "generateScopedName": "[name]__[local]___[hash:base64]",
-                    "filetypes": {
-                      ".scss": "postcss-scss"
-                    }
-                  }
-                ]
-              ]
-            }
-          }]
+          loader: 'babel-loader'
         },
         {
           test: /\.scss$/,
-          use: [
-            'style-loader',
+          use: ['style-loader',
             {
               loader: 'css-loader',
               options: {
                 sourceMap: true,
                 modules: true,
                 importLoaders: 2,
-                localIdentName: '[name]__[local]___[hash:base64]'
+                localIdentName: '[name]__[local]___[hash:base64:5]'
               }
             },
             'sass-loader',

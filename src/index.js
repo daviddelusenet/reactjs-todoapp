@@ -17,21 +17,22 @@ render(TodoApp);
 
 // Hot Module Replacement API
 // This doesn't work
-//if (module.hot) {
-//  module.hot.accept('./components/TodoApp', () => {
-//    render(TodoApp)
-//  });
-//}
-
-// This does work
-if(module.hot) {
+// This does work now!!
+if (module.hot) {
   module.hot.accept('./components/TodoApp', () => {
-    const NextApp = require('./components/TodoApp').default;
-    render(NextApp);
+    render(TodoApp)
   });
 }
 
 // This also works
+//if(module.hot) {
+//  module.hot.accept('./components/TodoApp', () => {
+//    const NextApp = require('./components/TodoApp').default;
+//    render(NextApp);
+//  });
+//}
+
+// And this also works
 //if(module.hot) {
 //  module.hot.accept();
 //}

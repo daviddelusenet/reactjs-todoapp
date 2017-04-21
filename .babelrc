@@ -7,7 +7,28 @@
     // Transpile React components to JavaScript
   ],
   "plugins": [
-    "react-hot-loader/babel"
-    // Enables React code to work with HMR.
-  ]
+    ["react-css-modules",
+      {
+        "context": "./src",
+        "generateScopedName": "[name]__[local]___[hash:base64:5]",
+        "filetypes": {
+          ".scss": "postcss-scss"
+        }
+      }
+    ]
+  ],
+  "env": {
+    "dev": {
+      "plugins": ["react-hot-loader/babel"] // Enables React code to work with HMR.
+    },
+    "prod": {
+      "plugins": [
+        ["react-css-modules",
+          {
+            "generateScopedName": "[path]___[name]__[local]___[hash:base64]",
+          }
+        ]
+      ]
+    }
+  }
 }
