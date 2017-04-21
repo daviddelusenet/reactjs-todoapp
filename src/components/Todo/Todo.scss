@@ -54,3 +54,25 @@
     display: none;
   }
 }
+
+.Todo--enter,
+.Todo--appear {
+  opacity: 0;
+}
+
+.Todo--enter.Todo--enter-active,
+.Todo--appear.Todo--appear-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.Todo--leave {
+  opacity: 1;
+}
+
+.Todo--leave.Todo--leave-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+
